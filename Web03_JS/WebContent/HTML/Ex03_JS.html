@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<title>Ex03</title>
+	<script type="text/javascript">
+		window.onload = function(){
+// 			alert("innerHTML: " + document.body.innerHTML + "\ninnerText: " + document.body.innerText);
+			
+// 			document.getElementById("demo").innerText = "change";
+
+			var list = ' ';
+			list += "<ul>";
+			list += "<li>Hello</li>";
+			list += "<li>Java</li>";
+			list += "<li>Jsp JavaScript</li>";
+			list += "</ul>";
+			
+// 			document.body.innerHTML = list;
+			document.getElementById('demo').innerHTML = list;
+		}
+		function change(){
+			document.getElementById("demo").innerText = "change";
+// 			document.getElementById("demo").innerHTML = "change";
+		}
+		function nameShow(){
+			var name = prompt("name : ");
+			document.getElementById("name1").innerHTML = name;
+		}
+		function age(){
+			document.getElementById("age1").innerHTML = "33";
+		}
+	</script>
+</head>
+<body>
+Good!!! <br>
+	<h5>만나서 반가워요! 잘해봐요~</h5>
+	<div id="demo">여기 글자가 바뀝니다</div>
+	<h1 id="name1">name</h1>
+	<h1 id="age1">age</h1>
+	<input type="button" value="Push it" onclick="change()">
+	<input type="button" value="Name" onclick="nameShow()">
+	<input type="button" value="Age" onclick="age()">
+</body>
+</html>

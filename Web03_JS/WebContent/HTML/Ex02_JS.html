@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<title>JavaScript for</title>
+	<link rel="stylesheet" href="../CSS/normalize.css">
+	<script type="text/javascript">
+// 		for(var i = 1; i < 10; i++){
+// 			document.write(a + "*" + a + "=" + a*a + "<br>");
+// 		}
+		var count = 0, sum = 0;
+		for(var i = 1; i <= 100; i++){
+			if(i % 3 == 0){
+				count += 1;
+				sum += i;
+			}
+		}
+		document.write("Count: " + count + ", Sum: " + sum + "<br>");
+		
+		document.write("<table>");
+		for(var i = 1; i < 10; i++){
+			document.write("<tr>");
+			for(var j = 2; j < 10; j++){
+				document.write("<td>" + j + "*" + i + "=" + i*j + "</td>");
+			}
+			document.write("</tr>");
+		}
+		document.write("</table>");
+	</script>
+</head>
+<body>
+
+</body>
+</html>

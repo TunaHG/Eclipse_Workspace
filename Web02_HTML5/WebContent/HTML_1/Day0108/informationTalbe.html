@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ex11_form.html Form input tag </title>
+<style type="text/css">
+	.star{
+		color: #fff;
+	}
+</style>
+
+</head>
+<body>
+
+
+<p><hr>
+<form action=""method="get">
+
+<table border="1" width="550"height="700" align="center" bgcolor="skyblue">
+
+	<tr><th colspan="2">회원 정보 입력</th></tr>
+	<tr><th>ID:</th><td><input type="text"name="I"id="name"required="required"placeholder="ID입력"></td></tr>
+	<tr><th>비밀번호:</th><td><input type="pssword"name="pwd"required="required"placeholder="비밀번호 입력""></td></tr>
+	<tr><th>이름:</th><td><input type="text"name="name"id="name"required="required"placeholder="이름 입력"></td></tr>
+	<tr><th>생일:</th><td><input type="date"name="date"></td></tr>
+	<tr><th>이메일:</th><td><input type="email"name="mail"maxlength="15"size="15"></td></tr>
+	
+	<tr><th>취미:</th><td>
+		<input type="checkbox"name="hobby"value="chk1"> 독서
+		<input type="checkbox"name="hobby"value="chk2"> 음악감상
+		<input type="checkbox"name="hobby"value="chk3"> 게임</td></tr>
+		
+	<tr><th>성별:</th><td><input type="radio"name="gender"value="F">여자
+		<input type="radio"name="gender"value="M">남자</td></tr>
+		
+	<tr><th>직업:</th><td>
+		<!-- <select size="3"multiple>  multiple을 쓰면 다중 선택이 간으해짐    -->
+		<select>   
+			<option value="opt1">선택하세요</option>
+			<option value="opt2">회사원</option>
+			<option value="opt3">경찰</option>
+			<option value="opt4">군인</option>
+			<option value="opt5">소방관</option>
+		</select></td></tr>
+	<tr><th>파일첨부:</th><td><input type="file"name="upload"></td></tr>
+		
+	<tr><th>자기소개:</th><td>
+		<textarea rows="5" cols="50"placeholder="내용"></textarea></td></tr>
+		
+		<tr><th colspan="2"><input type="submit" value="전송">
+		<input type="reset" value="취소"></th></tr>
+		
+		
+</table>
+</form>
+
+</body>
+</html>

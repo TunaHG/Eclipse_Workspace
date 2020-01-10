@@ -1,0 +1,30 @@
+@charset "UTF-8";
+/* @import url("../subCss/basic.css"); */
+body {
+	background-color: gray;
+}
+
+.navi {
+	background: #93DAFF;
+	margin: 50px;
+	width: 960px;
+	height: 85px;
+}
+
+.navi ul {
+	list-style: none;
+	height: 40px;
+	padding-top: 10px;
+	padding-bottom: 5px;
+}
+
+.navi ul li {
+	/* display: none; */
+	float: left;
+	font-size: 15px;
+	margin: 20px;
+}
+
+a {
+	text-decoration: none;
+}

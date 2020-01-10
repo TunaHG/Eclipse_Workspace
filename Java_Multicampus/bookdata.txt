@@ -1,0 +1,5 @@
+java 900
+sql 1100
+DB 2200
+web 33400
+spring 37000

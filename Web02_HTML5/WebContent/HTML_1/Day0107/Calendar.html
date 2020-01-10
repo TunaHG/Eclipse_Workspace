@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Calendar</title>
+<style type="text/css">
+	body{
+		background-color: #00FFFF;
+	}
+	table {
+		border: 3px solid black;
+		border-collapse: collapse;
+		width: 600px;
+		height: 600px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	td {
+		border: 1px solid black;
+		vertical-align: text-top;
+	}
+	tr#Week {
+		background-color: yellow;
+		border-bottom-width: 2px;
+		border-top-width: 2px;
+		text-align: center;
+	}
+	td#Sun {
+		color: red;
+	}
+	td#Sat {
+		color: blue;
+	}
+	tr:nth-child(even) {
+		background-color: #E6E6E6;
+	}
+	tr:nth-child(odd) {
+		background-color: #FFFFFF;
+	}
+</style>
+</head>
+<body>
+	<img alt="" src="https://gmlwjd9405.github.io/images/woowabros-tech-meetup/woowabros-character2.png" align="left" margin-top="400px">
+	<table>
+		<tr><th></th><th colspan="5"><font size=4>2020년 1월</font></th><th></th></tr>
+		<tr id="Week">
+			<td id="Sun">Sun</td><td>Mon</td><td>Tue</td><td>Wed</td><td>Thu</td><td>Fri</td><td id="Sat">Sat</td>
+		</tr>
+		<tr>
+			<td id="Sun"></td><td></td><td></td><td>1</td><td>2</td><td>3</td><td id="Sat">4</td>
+		</tr>
+		<tr>
+			<td id="Sun">5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td id="Sat">11</td>
+		</tr>
+		<tr>
+			<td id="Sun">12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td id="Sat">18</td>
+		</tr>
+		<tr>
+			<td id="Sun">19</td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td id="Sat">25</td>
+		</tr>
+		<tr>
+			<td id="Sun">26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td><td id="Sat"></td>
+		</tr>
+	</table>
+</body>
+</html>
