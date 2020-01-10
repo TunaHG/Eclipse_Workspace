@@ -3,8 +3,6 @@
 # Edit at https://www.gitignore.io/?templates=java,eclipse
 
 ### Eclipse ###
-DB_Final_Project_Web/*
-DB/*
 .metadata
 bin/
 tmp/
