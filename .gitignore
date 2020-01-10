@@ -3,6 +3,8 @@
 # Edit at https://www.gitignore.io/?templates=java,eclipse
 
 ### Eclipse ###
+DB_Final_Project_Web/*
+DB/*
 .metadata
 bin/
 tmp/
@@ -97,3 +99,4 @@ local.properties
 hs_err_pid*
 
 # End of https://www.gitignore.io/api/java,eclipse
+
