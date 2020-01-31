@@ -98,3 +98,15 @@ hs_err_pid*
 
 # End of https://www.gitignore.io/api/java,eclipse
 
+# 추가적으로 제외하는 개인적인 프로젝트
+# 하루만 사용하려고 만든 프로젝트라 내용이 뭐 없음
+Day0102_JDBC
+
+# 코딩테스트로 진행했던 코드들 + 개인적으로 연습한 코드들
+Test
+
+# 아파치 톰캣에 대한 Server 프로젝트
+Servers
+
+# 알고리즘 공부한 자잘한 코드
+Algorithm
