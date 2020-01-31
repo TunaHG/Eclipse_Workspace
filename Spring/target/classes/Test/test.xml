@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="vo" class="Test.TestVO">
+		<property name="member1" value="test1" />
+		<property name="member2" value="test2" />
+	</bean>
+
+	<bean id="dao" class="Test.TestDAO">
+		<property name="vo" ref="vo"/>
+	</bean>
+	
+	<bean id="service" class="Test.TestServiceImpl">
+		<property name="dao" ref="dao"/>
+	</bean>
+
+</beans>
