@@ -16,7 +16,7 @@ public class Main {
 		
 		// Dependency : 위임, 다른 객체로부터 생성
 		TVFactory factory = new TVFactory();
-		tv = factory.getTV(args[0]); // Run Configuration - arguments에 Other를 입력함
+		tv = factory.getTV(args[0]); // Run Configuration - arguments에 Other를 입력한 후 실행
 		tv.powerOn();
 		tv.soundUp();
 		tv.soundDown();
