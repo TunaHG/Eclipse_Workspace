@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+
+
+	<bean id="cat" class="aopexam.Cat"/>
+	<bean id="dog" class="aopexam.Dog"/>
+	<bean id="rabbit" class="aopexam.Rabbit"/>
+	<bean id="question" class="aopexam.Question"/>
+
+	<aop:config>
+		<aop:pointcut expression="execution(public * aopexam.*.*(..))" id="pc"/>
+		<aop:aspect id="aspect1" ref="question">
+			<aop:before method="q" pointcut-ref="pc"/>
+		</aop:aspect>
+	</aop:config>
+</beans>
