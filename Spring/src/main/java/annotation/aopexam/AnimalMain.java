@@ -17,6 +17,12 @@ public class AnimalMain {
 		for(Animal x : ani) {
 			x.lunch();
 			System.out.println();
+			
+//			aspect-around 일부 >> lunch() >> aspect-around 일부
+//			그래서 around로 호출되는 메소드인 q()의 return값이 void기 때문에 null이 나온다.
+//			이를 제대로 작동하도록 만들기 위해서는 q()에서 return type을 Object로 지정해준 후 proceed()로 나오는 결과물의 변수를 try밖으로 꺼낸 후 return한다.
+//			String str = x.lunch();
+//			System.out.println(str); // null
 		}
 	}
 
