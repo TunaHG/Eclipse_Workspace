@@ -19,8 +19,6 @@ public class AopMain {
 		b.insertBoard(100);
 		b.getList();
 		m.logout();
-		
-		
 	}
 
 }
