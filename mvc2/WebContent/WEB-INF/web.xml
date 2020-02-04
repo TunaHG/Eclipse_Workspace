@@ -13,7 +13,7 @@
     <description></description>
     <display-name>FrontControllerServlet</display-name>
     <servlet-name>FrontControllerServlet</servlet-name>
-    <servlet-class>test.FrontControllerServlet</servlet-class>
+    <servlet-class>mvctest.FrontControllerServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>FrontControllerServlet</servlet-name>

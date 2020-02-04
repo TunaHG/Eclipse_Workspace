@@ -1,9 +1,12 @@
-package test;
+package mvctest;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,6 +30,12 @@ public class FrontControllerServlet extends HttpServlet {
 		out.println("<h1>" + str[str.length - 1] + "</h1>");
 		
 //		3. board.list 일 시키기 MVC(Model - View - Controller) => Spring 내부 환경 이해 로직
+		HandlerMapping mapping = new HandlerMapping();
+		Controller controller = mapping.getController(str[str.length - 1]);
+		String viewname = controller.handleRequest(request, response);
+		
+		RequestDispatcher rd = request.getRequestDispatcher(viewname);
+		rd.forward(request, response);
 	}
 
 }
