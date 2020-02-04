@@ -1,8 +1,5 @@
 package mvctest;
 
-import org.springframework.stereotype.Component;
-
-@Component
 public class BoardVO {
 	int seq;
 	String title;

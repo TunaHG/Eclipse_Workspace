@@ -6,8 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import org.springframework.stereotype.Repository;
-
 public class BoardDAO {
 	public ArrayList<BoardVO> getList(){
 		ArrayList<BoardVO> list = new ArrayList<BoardVO>();
