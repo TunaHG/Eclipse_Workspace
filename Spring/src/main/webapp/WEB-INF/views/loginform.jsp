@@ -11,7 +11,8 @@
 	
 	<form action="http://localhost:8080/mvc/login" method="POST">
 		ID:<input type="text" name="id"><br>
-		PW:<input type="password" name=pw"><br>
+		PW:<input type="password" name="pw"><br>
+		AGE:<input type="text" name="age"><br>
 		<input type="submit" value="login">
 	</form>
 </body>

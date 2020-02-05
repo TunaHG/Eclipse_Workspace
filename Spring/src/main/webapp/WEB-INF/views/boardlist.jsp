@@ -28,7 +28,14 @@
 	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	<h1>EL 표현식</h1>
 	<c:forEach items="${boardlist}" var="vo">
-		<h3> 번호: ${vo.seq}, 제목: ${vo.title}, 내용: ${vo.contents}, 작성자: ${vo.writer}, 일시: ${vo.time}, 조회수: ${vo.viewcount} </h3>		
+		<h3> 
+		번호: <a href="http://localhost:8080/mvc/boarddetail?seq=${vo.seq}">${vo.seq}</a>, 
+		제목: ${vo.title}, 
+		내용: ${vo.contents}, 
+		작성자: ${vo.writer}, 
+		일시: ${vo.time}, 
+		조회수: ${vo.viewcount} 
+		</h3>		
 	</c:forEach>
 	
 </body>
