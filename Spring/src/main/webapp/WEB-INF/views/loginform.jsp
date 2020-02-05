@@ -10,7 +10,8 @@
 	<h1>loginform.jsp 파일이 보입니다.</h1>
 	
 	<form action="http://localhost:8080/mvc/login" method="POST">
-		ID:<input type="text" name="id">
+		ID:<input type="text" name="id"><br>
+		PW:<input type="password" name=pw"><br>
 		<input type="submit" value="login">
 	</form>
 </body>
