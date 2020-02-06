@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class LoginController {
 //	from 입력화면
-	@RequestMapping(name="/login", method=RequestMethod.GET)
+	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public String loginform() { // 1. Mapping method의 return type이 String이면, String이 View의 이름이 된다. >> Spring 규칙
 //		Login form 출력 = HTML tag = jsp
 		return "loginform";
@@ -65,7 +65,7 @@ public class LoginController {
 	} 
 	*/
 	
-	@RequestMapping(name="/login", method=RequestMethod.POST)
+	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public ModelAndView loginsuccess(@ModelAttribute("login") LoginVO vo) {
 		// 요청 파라미터 이름과 컨트롤러 메소드 매개변수가 자바객체 일 때, 객체 내부 멤버변수를 이름과 동일하게 저장
 		

@@ -21,7 +21,7 @@
 		<input type="submit" value="수정">
 	</form>
 	<form action="http://localhost:8080/mvc/boarddelete">
-		<input value="${boarddetail.seq}" name="seq" hidden="true">
+		<input type="hidden" value="${boarddetail.seq}" name="seq">
 		<input type="submit" value="삭제">
 	</form>
 	<form action="http://localhost:8080/mvc/boardlist">

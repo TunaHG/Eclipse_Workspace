@@ -64,10 +64,9 @@ public class BoardlistController {
 	
 	// 1개 게시물 수정을 DB에 저장
 	@RequestMapping(value="/boardupdate", method=RequestMethod.POST)
-	public String updateBoardResult(int seq, BoardVO vo) {
-		vo.setSeq(seq);
+	public String updateBoardResult(BoardVO vo) {
 		dao.updateBoard(vo);
-		return "redirect:/boarddetail?seq=" + seq;
+		return "redirect:/boardlist";
 	}
 
 	// 1개 게시물 삭제
