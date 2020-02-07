@@ -65,13 +65,28 @@ public class EmpMain {
 //		System.out.println("신규 사원을 등록했습니다.");
 		
 		// Test6 : 1001 사번의 이름변경 석천, 이메일변경 hong@multi.com
-		EmpVO vo = new EmpVO();
-		vo.setEmployee_id(1001);
-		vo.setFirst_name("석천");
-		vo.setEmail("hong@multi.com");
+//		EmpVO vo = new EmpVO();
+//		vo.setEmployee_id(1001);
+//		vo.setFirst_name("석천");
+//		vo.setEmail("hong@multi.com");
 		
-		int row = dao.updateEmp(vo);
-		System.out.println(row + "개의 행이 수정 완료되었습니다.");
+//		int row = dao.updateEmp(vo);
+//		System.out.println(row + "개의 행이 수정 완료되었습니다.");
+		
+		// Test7 : 삭제 (1001 사번 삭제)
+//		int id = 1001;
+//		int row = dao.deleteEmp(id);
+//		System.out.println(row + "개의 행이 삭제되었습니다.");
+		
+		// Paging with Rownum
+		int pagenum = 2;
+		int[] param = new int[2];
+		param[0] = (pagenum - 1) * 10 + 1;
+		param[1] = pagenum * 10;
+		List<EmpVO> list = dao.pagingEmp(param);
+		for(EmpVO vo : list) {
+			System.out.println(vo.getFirst_name() + "\t:\t" + vo.getHire_date());
+		}
 	}
 	
 }

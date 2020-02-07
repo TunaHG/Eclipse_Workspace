@@ -59,4 +59,16 @@ public class EmpDAO {
 		int row = session.update("updateemp", vo);
 		return row;
 	}
+	
+	// Test7
+	public int deleteEmp(int id) {
+		int row = session.delete("deleteemp", id);
+		return row;
+	}
+	
+	// Paging with Rownum
+	public List<EmpVO> pagingEmp(int[] param) {
+		List<EmpVO> list = session.selectList("pagingemp", param);
+		return list;
+	}
 }

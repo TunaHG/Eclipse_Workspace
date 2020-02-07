@@ -37,6 +37,25 @@
 		set first_name = #{first_name}, email = #{email}
 		where employee_id = #{employee_id}
 	</update>
-<!-- 	<delete id=""></delete> -->
+	
+	<delete id="deleteemp" parameterType="int">
+		delete employees where employee_id = #{id}
+	</delete>
+	
+	<!-- 
+	create sequence emp_sequence;
+	1부터 시작해서 1씩 증가
+	1씩 증가시키기 위해 => select emp_sequence.nextval from dual 
+	-->
+	<!-- <insert id="">
+		insert into employees values (emp_sequence.nextval, )
+	</insert> -->
+	
+	<select id="pagingemp" resultType="emp" parameterType="int[]">
+		select first_name, hire_date
+		from (select rownum r, first_name, hire_date
+			  from (select * from employees order by hire_date desc))
+		where r between #{array[0]} and #{array[1]}
+	</select>
 </mapper>
 
