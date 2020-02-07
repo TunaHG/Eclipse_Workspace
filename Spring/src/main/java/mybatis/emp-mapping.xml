@@ -24,9 +24,13 @@
 	
 	<select id="idemp" resultType="emp">
 		<!-- CDATA Section은 >와 <같은 HTML 태그로 사용되는 것들을 문자열로 인식하게 도와주는 역할 -->
-		<![CDATA[select employee_id, first_name, to_char(hire_date, 'yyyy-mm-dd hh:mi:ss') from employees where employee_id < 150]]>
+		<![CDATA[select employee_id, first_name, to_char(hire_date, 'mm/dd/yyyy hh"시"mi"분"ss"초"') as hire_date from employees where employee_id < 150]]>
 	</select>
-<!-- 	<insert id=""></insert> -->
+	
+	<insert id="newemp" parameterType="emp">
+		insert into employees(employee_id, first_name, last_name, email, job_id, hire_date)
+		values(#{employee_id}, #{first_name}, #{last_name}, #{email}, #{job_id}, sysdate)
+	</insert>
 <!-- 	<update id=""></update> -->
 <!-- 	<delete id=""></delete> -->
 </mapper>
