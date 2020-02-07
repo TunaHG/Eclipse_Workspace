@@ -1,0 +1,46 @@
+package mybatis;
+
+import java.util.List;
+
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+
+public class EmpMain {
+
+	public static void main(String[] args) throws Exception {
+		// 1.
+		SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
+		// 2. SqlSessionFactory = JDBC Connection 과 유사, 연결 설정 파일을 읽는 것. (SqlSession을 만드는 공장 역할)
+		SqlSessionFactory factory = builder.build(Resources.getResourceAsReader("mybatis/mybatis-config.xml"));
+		// 3. SqlSession = 연결 생성
+		SqlSession session = factory.openSession();
+
+		System.out.println(session);
+
+		// Test1 : 여러 개 레코드 조회
+		// <select id="allemp" resultType="mybatis.EmpVO">
+//		List<EmpVO> list = session.selectList("allemp");
+//		for (EmpVO vo : list) {
+//			System.out.println(vo.getEmployee_id() + ":" + vo.getFirst_name());
+//		}
+
+		// Test2 : 1개 레코드 조회 (사번이 100인 사람)
+//		EmpVO vo = session.selectOne("oneemp", 100);
+//		System.out.println(vo.getEmployee_id() + ":" + vo.getFirst_name());
+		
+		// Test3 : 1개 혹은 그이상의 레코드 조회 (이름이 Steven인 사람)
+//		List<EmpVO> list = session.selectList("nameemp", "Steven");
+//		for (EmpVO vo : list) {
+//			System.out.println(vo.getEmployee_id() + ":" + vo.getFirst_name());
+//		}
+		
+		// Test4 : CDATA Section 실행
+		List<EmpVO> list = session.selectList("idemp");
+		for (EmpVO vo : list) {
+			System.out.println(vo.getEmployee_id() + ":" + vo.getFirst_name() + ":" + vo.getHire_date());
+		}
+	}
+
+}

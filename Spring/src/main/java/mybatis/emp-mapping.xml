@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="emp">
+	<!-- CRUD : insert, select, update, delete sql -->
+	
+	<!-- 107개 레코드 중 1개 레코드를 가져와서 EmpVO 자바 객체 타입에 Mapping -->
+	<select id="allemp" resultType="mybatis.EmpVO">
+		select * from employees
+	</select>
+	
+	<select id="oneemp" resultType="mybatis.EmpVO" parameterType="int">
+		select * from employees where employee_id = #{a}
+	</select>
+	
+	<select id="nameemp" resultType="mybatis.EmpVO" parameterType="String">
+		select * from employees where first_name = #{name}
+	</select>
+	
+	<!-- session.selectList("namelikeemp", "P%" -->
+	<select id="namelikeemp" resultType="mybatis.EmpVO" parameterType="String">
+		select * from employees where first_name like #{pattern}
+	</select>
+	
+	<select id="idemp" resultType="emp">
+		<!-- CDATA Section은 >와 <같은 HTML 태그로 사용되는 것들을 문자열로 인식하게 도와주는 역할 -->
+		<![CDATA[select employee_id, first_name, to_char(hire_date, 'yyyy-mm-dd hh:mi:ss') from employees where employee_id < 150]]>
+	</select>
+<!-- 	<insert id=""></insert> -->
+<!-- 	<update id=""></update> -->
+<!-- 	<delete id=""></delete> -->
+</mapper>
+
