@@ -31,7 +31,12 @@
 		insert into employees(employee_id, first_name, last_name, email, job_id, hire_date)
 		values(#{employee_id}, #{first_name}, #{last_name}, #{email}, #{job_id}, sysdate)
 	</insert>
-<!-- 	<update id=""></update> -->
+	
+	<update id="updateemp" parameterType="emp">
+		update employees
+		set first_name = #{first_name}, email = #{email}
+		where employee_id = #{employee_id}
+	</update>
 <!-- 	<delete id=""></delete> -->
 </mapper>
 

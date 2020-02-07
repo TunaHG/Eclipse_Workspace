@@ -51,17 +51,27 @@ public class EmpMain {
 		
 		// Test5 : 새로운 사원 등록 (insert)
 		// 1000, 홍길동, gil@multi.com, sysdate, IT_PROG,
-		EmpVO vo = new EmpVO();
-		vo.setEmployee_id(1000);
-		vo.setFirst_name("길동"); // null 허용
-		vo.setLast_name("홍");
-		vo.setEmail("gil@multi.com");
-		vo.setJob_id("IT_PROG"); // SQL 대소문자 구분 X (but, 문자열값에서는 대소문자 구분함)
+//		EmpVO vo = new EmpVO();
+//		vo.setEmployee_id(1001);
+//		vo.setFirst_name("길동"); // null 허용
+//		vo.setLast_name("홍");
+//		vo.setEmail("gil2@multi.com");
+//		vo.setJob_id("IT_PROG"); // SQL 대소문자 구분 X (but, 문자열값에서는 대소문자 구분함)
+		
 		// ? <- select
 		// insert / delete / update => DML
 //		dao.insertEmp(vo); // insert sql
 //		session.commit(); // commit
-		System.out.println("신규 사원을 등록했습니다.");
+//		System.out.println("신규 사원을 등록했습니다.");
+		
+		// Test6 : 1001 사번의 이름변경 석천, 이메일변경 hong@multi.com
+		EmpVO vo = new EmpVO();
+		vo.setEmployee_id(1001);
+		vo.setFirst_name("석천");
+		vo.setEmail("hong@multi.com");
+		
+		int row = dao.updateEmp(vo);
+		System.out.println(row + "개의 행이 수정 완료되었습니다.");
 	}
 	
 }

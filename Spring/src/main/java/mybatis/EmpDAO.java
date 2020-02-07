@@ -53,4 +53,10 @@ public class EmpDAO {
 		// <insert id="newemp" parameterType="emp"> insert... </insert> 
 		session.insert("newemp", vo);
 	}
+	
+	// Test6
+	public int updateEmp(EmpVO vo) {
+		int row = session.update("updateemp", vo);
+		return row;
+	}
 }
