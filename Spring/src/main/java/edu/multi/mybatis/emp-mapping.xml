@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="emp">
+	<!-- CRUD : insert, select, update, delete sql -->
+	
+	<!-- 107개 레코드 중 1개 레코드를 가져와서 EmpVO 자바 객체 타입에 Mapping -->
+	<select id="allemp" resultType="emp">
+		select * from employees
+	</select>
+	
+	<select id="oneemp" resultType="emp" parameterType="int">
+		select * from employees where employee_id = #{a}
+	</select>
+	
+	<select id="nameemp" resultType="emp" parameterType="String">
+		select * from employees where first_name = #{name}
+	</select>
+	
+	<!-- session.selectList("namelikeemp", "P%" -->
+	<select id="namelikeemp" resultType="emp" parameterType="String">
+		select * from employees where first_name like #{pattern}
+	</select>
+	
+	<select id="idemp" resultType="emp">
+		<!-- CDATA Section은 >와 <같은 HTML 태그로 사용되는 것들을 문자열로 인식하게 도와주는 역할 -->
+		<![CDATA[select employee_id, first_name, to_char(hire_date, 'mm/dd/yyyy hh"시"mi"분"ss"초"') as hire_date from employees where employee_id < 150]]>
+	</select>
+	
+	<insert id="newemp" parameterType="emp">
+		insert into employees(employee_id, first_name, last_name, email, job_id, hire_date)
+		values(#{employee_id}, #{first_name}, #{last_name}, #{email}, #{job_id}, sysdate)
+	</insert>
+	
+	<update id="updateemp" parameterType="emp">
+		update employees
+		set first_name = #{first_name}, email = #{email}
+		where employee_id = #{employee_id}
+	</update>
+	
+	<delete id="deleteemp" parameterType="int">
+		delete employees where employee_id = #{id}
+	</delete>
+	
+	<!-- 
+	create sequence emp_sequence;
+	1부터 시작해서 1씩 증가
+	1씩 증가시키기 위해 => select emp_sequence.nextval from dual 
+	-->
+	<!-- <insert id="">
+		insert into employees values (emp_sequence.nextval, )
+	</insert> -->
+	
+	<select id="pagingemp" resultType="emp" parameterType="int[]">
+		select first_name, hire_date
+		from (select rownum r, first_name, hire_date
+			  from (select * from employees order by hire_date desc))
+		where r between #{array[0]} and #{array[1]}
+	</select>
+</mapper>
+
