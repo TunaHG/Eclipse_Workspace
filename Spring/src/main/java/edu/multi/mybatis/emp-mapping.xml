@@ -52,10 +52,14 @@
 	</insert> -->
 	
 	<select id="pagingemp" resultType="emp" parameterType="int[]">
-		select first_name, hire_date
-		from (select rownum r, first_name, hire_date
+		select employee_id, first_name, last_name, hire_date
+		from (select rownum r, employee_id, first_name, last_name, hire_date
 			  from (select * from employees order by hire_date desc))
 		where r between #{array[0]} and #{array[1]}
+	</select>
+	
+	<select id="cntemp" resultType="int">
+		select count(*) from employees
 	</select>
 </mapper>
 

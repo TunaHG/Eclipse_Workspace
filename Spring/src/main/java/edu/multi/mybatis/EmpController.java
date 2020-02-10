@@ -32,4 +32,36 @@ public class EmpController {
 		
 		return mv;
 	}
+	
+	// employees 테이블 존재 레코드 갯수 페이지 번호를 생성
+	@RequestMapping("/mybatis/pagingemplist")
+	// 1. select count(*) from employees; => 108
+	// mybatis - emp-mapping.xml
+	public ModelAndView getCntEmp(){
+		int count = dao.getCountEmp();
+		int cntPerPage = 10;
+		int totalPage = 0;
+		if(count % cntPerPage != 0) {
+			totalPage = count / cntPerPage + 1;
+		} else {
+			totalPage = count / cntPerPage;
+		}
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("totalPage", totalPage);
+		
+		return mv;
+	}
+	
+	@RequestMapping("/mybatis/pagingemplist2")
+	public ModelAndView getPagingEmpList(int pagenum) {
+		int cntPerPage = 10;
+		int start = (pagenum - 1) * cntPerPage + 1;
+		int end = pagenum * cntPerPage;
+		int[] param = {start, end};
+		List<EmpVO> paginglist = dao.pagingEmp(param);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("paginglist", paginglist);
+		
+		return mv;
+	}
 }

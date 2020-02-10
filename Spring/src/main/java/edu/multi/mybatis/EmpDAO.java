@@ -76,4 +76,9 @@ public class EmpDAO {
 		List<EmpVO> list = session.selectList("pagingemp", param);
 		return list;
 	}
+	
+	public int getCountEmp() {
+		int result = session.selectOne("cntemp");
+		return result;
+	}
 }
