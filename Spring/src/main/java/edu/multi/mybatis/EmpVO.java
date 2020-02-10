@@ -2,7 +2,7 @@ package edu.multi.mybatis;
 
 public class EmpVO {
 	// hr계정에 있는 employees Table증 1개 레코드에 속한 Column들을 저장하는 객체
-	int employee_id, manager_id;
+	int employee_id, manager_id, department_id;
 	String first_name, last_name, email, phone_number, hire_date, job_id;
 	double salary, commission_pct;
 	
@@ -17,6 +17,12 @@ public class EmpVO {
 	}
 	public void setManager_id(int manager_id) {
 		this.manager_id = manager_id;
+	}
+	public int getDepartment_id() {
+		return department_id;
+	}
+	public void setDepartment_id(int department_id) {
+		this.department_id = department_id;
 	}
 	public String getFirst_name() {
 		return first_name;
@@ -65,5 +71,10 @@ public class EmpVO {
 	}
 	public void setCommission_pct(double commission_pct) {
 		this.commission_pct = commission_pct;
+	}
+	
+	public String toString() {
+		
+		return null;
 	}
 }

@@ -12,5 +12,10 @@
 	<c:forEach items="${list}" var="vo">
 		사번 : ${vo.employee_id} / 성 : ${vo.last_name}, 이름 : ${vo.first_name} <br>
 	</c:forEach>
+	
+	<form action="<%=request.getContextPath()%>/mybatis/detailemp">
+		사번 : <input type=text name="employee_id">
+		<input type=submit value="조회">
+	</form>
 </body>
 </html>

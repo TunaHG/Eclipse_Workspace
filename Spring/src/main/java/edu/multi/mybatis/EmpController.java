@@ -23,4 +23,13 @@ public class EmpController {
 		
 		return mv;
 	}
+	
+	@RequestMapping("/mybatis/detailemp")
+	public ModelAndView getDetailEmp(int employee_id) {
+		EmpVO vo = dao.getOneEmp(employee_id);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("vo", vo);
+		
+		return mv;
+	}
 }
