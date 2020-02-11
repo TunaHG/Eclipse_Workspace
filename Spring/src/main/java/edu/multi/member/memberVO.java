@@ -1,6 +1,6 @@
 package edu.multi.member;
 
-public class memberVO {
+public class MemberVO {
 	String userid;
 	String password;
 	String name;

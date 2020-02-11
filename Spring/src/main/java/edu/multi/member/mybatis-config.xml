@@ -5,6 +5,6 @@
   
 <configuration>
 	<typeAliases>
-		<typeAlias type="edu.multi.member.memberVO" alias="member"/>
+		<typeAlias type="edu.multi.member.MemberVO" alias="member"/>
 	</typeAliases>
 </configuration>

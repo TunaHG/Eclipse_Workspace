@@ -2,8 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
-	<select id="checkid" resultType="int" parameterType="member">
+	<select id="checkid" resultType="int" parameterType="String">
 		select count(*) from member where userid = #{userid}
+	</select>
+	
+	<select id="getmember" resultType="member" parameterType="member">
+		select * from member where userid = #{userid} and password = #{password}
 	</select>
 	
 	<insert id="insertmember" parameterType="member">
