@@ -1,4 +1,4 @@
-package Intermediate;
+package Intermediate.Array1;
 
 import java.util.Arrays;
 import java.util.Scanner;
