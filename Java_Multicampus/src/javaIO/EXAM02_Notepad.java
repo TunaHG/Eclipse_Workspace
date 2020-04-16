@@ -16,16 +16,16 @@ import javafx.scene.layout.FlowPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-
 public class EXAM02_Notepad extends Application {
 	
 	private TextArea ta;
 	private Button openBtn, saveBtn;
 	
 	private void printMSG(String msg) {
-		Platform.runLater(() -> {
+		Platform.runLater(() -> {						
 			ta.appendText(msg + "\n");
-		});
+		}					
+	);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -37,44 +37,42 @@ public class EXAM02_Notepad extends Application {
 		ta = new TextArea();   // 글상자를 생성
 		root.setCenter(ta);	  // BorderPane가운데에 TextArea 부착
 		
-		openBtn = new Button("Open File");
+		openBtn = new Button("파일 열기");
 		openBtn.setPrefSize(250, 50);
 		openBtn.setOnAction(e -> {
-			// 파일 열기
-			// 1. TextArea를 초기화
-			ta.clear();
-			// 2. Open할 File 선택 => File Chooser를 이용
-			FileChooser fileChooser = new FileChooser();
-			fileChooser.setTitle("Open할 File 선택");
-
-			// File 선택창에서 원하는 file을 선택한 후 Open 버튼을 Click시 File객체가 생성됨
-			File file = fileChooser.showOpenDialog(primaryStage);
-			
-			// Open할 File을 선택했으면 File과 Program과의 Stream을 생성해야함
-			try {
-				FileReader fr = new FileReader(file);
-				BufferedReader br = new BufferedReader(fr);
-				String line = "";
-				while((line = br.readLine()) != null) {
+				// 파일열기 처리!!
+			    // 1. textarea를 초기화
+				ta.clear();
+				// 2. Open할 파일을 선택해요!! => File Chooser를 이용
+				FileChooser fileChooser = new FileChooser();
+				fileChooser.setTitle("Open할 파일을 선택해주세요!");
+				// 파일선택창에서 원하는 file을 선택한 후 open버튼을 누르면
+				// File객체가 생성
+				File file = fileChooser.showOpenDialog(primaryStage);
+				// Open할 File을 선택했으면..
+				// Stream을 생성해요!!
+				try {
+					FileReader fr = new FileReader(file);
+					BufferedReader br = new BufferedReader(fr);
+					String line ="";
+					while((line = br.readLine()) != null ) {
+						printMSG(line);
+					}
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e2) {
 					
 				}
-			} catch(FileNotFoundException e1) {
-				e1.printStackTrace();
-			} catch(IOException e2) {
-				e2.printStackTrace();
-			}
-		});
+			}		
+		);
 		
-		saveBtn = new Button("Save File");
-		saveBtn.setPrefSize(250, 50);
-		saveBtn.setOnAction(e -> {
-			
-		});
 	
+		// 일반 Panel하나를 생성할꺼예요!! => LinearLayout처럼 동작하는..
 		FlowPane flowpane = new FlowPane();
 		flowpane.setPrefSize(700, 50);
 		flowpane.getChildren().add(openBtn);  // FlowPane에 Button을 부착
-		flowpane.getChildren().add(saveBtn);  // FlowPane에 Button을 부착
+		//flowpane.getChildren().add(saveBtn);  // FlowPane에 Button을 부착
 		
 		root.setBottom(flowpane);  // 전체 화면의 아래부분에 FlowPane 부착
 		
