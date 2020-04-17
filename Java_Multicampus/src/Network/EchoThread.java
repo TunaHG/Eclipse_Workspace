@@ -9,7 +9,7 @@ import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
 
-public class EchoThread  extends Thread {
+public class EchoThread extends Thread {
 	private Socket socket;
 	
 	public EchoThread(Socket socket) {
