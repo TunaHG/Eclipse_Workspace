@@ -100,18 +100,26 @@ public class Exam05_MultiRoomChatClient extends Application {
 			}
 			
 			try {
+				// Socket을 이용하여 Server와 연결
 				socket = new Socket("localhost", 20000);
 				textarea.clear();
 				printMSG("[System]\tServer Connected");
 				
+				// Socket을 이용하여 Input, Output Stream 생성
 				br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 				pw = new PrintWriter(socket.getOutputStream());
 				
+				// Server로 부터 명령어를 받을 Thread객체 생성
 				ReceiveRunnable r = new ReceiveRunnable(br);
+				// Thread Pool로 Thread 실행
 				es.execute(r);
 				
+				// userID를 지정하는 명령어 실행
 				pw.println("@userID " + entered);
+				// 모든 채팅방을 갱신하는 명령어 실행 
+				// 두 번째 이후의 Client가 Server에 접속할 경우 이미 생성되어있는 채팅방을 가져오기 위함.
 				pw.println("@getRooms");
+				// 명령어 전송, PrintWriter는 Queue처럼 먼저 들어간 Message가 먼저 나온다.
 				pw.flush();
 			} catch (UnknownHostException e1) {
 				e1.printStackTrace();
@@ -122,6 +130,7 @@ public class Exam05_MultiRoomChatClient extends Application {
 			userID = entered;
 			printMSG("[System]\t환영합니다. " + userID + "님");
 			
+			// 실행불가로 생성한 Button들 모두 실행가능하도록 변경
 			createRoomBtn.setDisable(false);
 			connRoomBtn.setDisable(false);
 			disconnBtn.setDisable(false);
@@ -132,8 +141,16 @@ public class Exam05_MultiRoomChatClient extends Application {
 		disconnBtn.setDisable(true);
 		disconnBtn.setOnAction(e -> {
 			try {
+				// Server에 존재하는 User객체를 제거하기위한 명령어 전송
+				pw.println("@DELETE");
+				pw.flush();
+				
+				// GUI의 모든 채팅방과 모든 User제거
 				roomListView.getItems().clear();
 				participantsListView.getItems().clear();
+				textarea.clear();
+				
+				// 사용한 모든 자원 해제
 				br.close();
 				pw.close();
 				socket.close();
@@ -161,15 +178,11 @@ public class Exam05_MultiRoomChatClient extends Application {
 				entered = result.get();
 			}
 			
-			// 방 이름이 서버에 전달되어야 함
-			try {
-				pw = new PrintWriter(socket.getOutputStream());
-				pw.println("@createRoom " + entered);
-				pw.println("@getRooms");
-				pw.flush();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
+			// 채팅방 이름을 Server에 전달하여 새로운 채팅방을 만드는 명령어 전송
+			pw.println("@createRoom " + entered);
+			// 채팅방 목록을 갱신하는 명령어 전송
+			pw.println("@getRooms");
+			pw.flush();
 		});
 		
 		connRoomBtn = new Button("Connect Chat Room");
@@ -178,13 +191,14 @@ public class Exam05_MultiRoomChatClient extends Application {
 		connRoomBtn.setOnAction(e -> {
 			// 1. 어떤 방을 선택했는지를 알아옴
 			String roomName = roomListView.getSelectionModel().getSelectedItem();
-			printMSG("[" + userID + "]\t" + roomName + "에 입장하셨습니다.");
 			
-			// 서버에 접속해서 현재 방에 참여하고 있는 참여자 목록을 받아옴
-			// 목록을 받아오면 참여자 ListView에 출력
+			// 특정 채팅방에 접속하는 명령어 실행
 			pw.println("@connRoom " + roomName);
+			// 특정 채팅방에 존재하는 모든 User를 받아오는 명령어 실행
 			pw.println("@getUsers");
 			pw.flush();
+			
+			printMSG("[" + userID + "]\t" + roomName + "에 입장하셨습니다.");
 			
 			// 밑 부분의 메뉴를 채팅을 입력할 수 있는 화면으로 전환
 			FlowPane inputFlow = new FlowPane();
@@ -195,15 +209,19 @@ public class Exam05_MultiRoomChatClient extends Application {
 			TextField inputTF = new TextField();
 			inputTF.setPrefSize(400, 40);
 			inputTF.setOnAction(e1 -> {
+				// 채팅창에 채팅 입력후 Enter를 치면, 해당 코드 실행
+				// 채팅을 String변수로 가져옴
 				String msg = inputTF.getText();
+				// 채팅 전송
 				pw.println(msg);
 				pw.flush();
+				// 채팅창 비우기
 				inputTF.clear();
 			});
 			
+			// 특정 채팅방에 접속했으니 Button들을 전부제거하고 그 위치에 채팅창 생성
 			inputFlow.getChildren().add(inputTF);
 			root.setBottom(inputFlow);
-			
 		});
 		
 		menuflow = new FlowPane();
@@ -222,6 +240,25 @@ public class Exam05_MultiRoomChatClient extends Application {
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Multi Room Chat Client");
 		primaryStage.setOnCloseRequest(e -> {
+			// X를 눌러 Client GUI를 종료시켰을 때,
+			// Disconnect Button을 클릭하지 않아서 연결되어있는 상태라면
+			if(socket != null) {
+				// User를 모든 채팅방, Server의 자료구조에서 제거하는 명령어 전송
+				pw.println("@EXIT");
+				pw.println("@delete");
+				pw.flush();
+				
+				// 모든 자원 해제
+				try {
+					br.close();
+					pw.close();
+					socket.close();
+					es.shutdownNow();
+				} catch (IOException e2) {
+					e2.printStackTrace();
+				}
+			}
+			// Program 종료
 			System.exit(0);
 		});
 		primaryStage.show();
@@ -238,11 +275,17 @@ public class Exam05_MultiRoomChatClient extends Application {
 			this.br = br;
 		}
 		
+		// 모든 채팅방을 갱신하는 Method
 		public void getRooms(String tmp) {
+			// 모든 채팅방의 목록
 			String[] rooms = tmp.split(" ");
+			// start()외부에서 GUI를 변경하기 위해서는 해당 Method를 통해 Thread를 이용해야 함
 			Platform.runLater(() -> {
+				// 전부 새로 입력하기 전에 기존에 입력된 내용 제거
 				roomListView.getItems().clear();
+				// 모든 채팅방 새로 입력
 				for(String room : rooms) {
+					// 명령어 제거
 					if(room.equals("@getRooms"))
 						continue;
 					roomListView.getItems().add(room);
@@ -250,7 +293,9 @@ public class Exam05_MultiRoomChatClient extends Application {
 			});
 		}
 		
+		// 특정 채팅방에 포함된 모든 User목록을 갱신하는 Method
 		public void getUsers(String msg) {
+			// User의 목록
 			String[] users = msg.split(" ");
 			Platform.runLater(() -> {
 				participantsListView.getItems().clear();
@@ -261,6 +306,7 @@ public class Exam05_MultiRoomChatClient extends Application {
 				}
 			});
 		}
+		
 		@Override
 		public void run() {
 			String msg = "";
@@ -269,21 +315,27 @@ public class Exam05_MultiRoomChatClient extends Application {
 					msg = br.readLine();
 					if(msg == null)
 						break;
+					// @EXIT 메시지를 받으면, 특정 채팅방의 접속을 종료했다는 의미
 					if(msg.equals("@EXIT")) {
 						Platform.runLater(() -> {
+							// 특정 채팅방에 포함된 User의 목록 비우기
 							participantsListView.getItems().clear();
+							// 채팅창을 없애고 4개의 Button으로 다시 구성
 							root.setBottom(menuflow);
 						});
 						continue;
 					}
+					// @getRooms 메시지를 받으면, 해당 기능을 수행하는 Method 실행
 					if(msg.startsWith("@getRooms")) {
 						getRooms(msg);
 						continue;
 					}
+					// @getUsers 메시지를 받으면, 해당 기능을 수행하는 Method 실행
 					if(msg.startsWith("@getUsers")) {
 						getUsers(msg);
 						continue;
 					}
+					// 특정 메시지 이외에는 전부 채팅이므로 출력
 					printMSG(msg);
 				}
 				
