@@ -9,7 +9,7 @@ import java.net.Socket;
 import gnu.io.CommPort;
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
-public class Exam03 {
+public class Exam03_MyCode {
 	public static void main(String[] args) {
 		
 		CommPortIdentifier portIdentifier = null;
