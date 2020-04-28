@@ -14,7 +14,7 @@ import gnu.io.CommPort;
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
 
-public class Exam03_AndroidArduinoServer {
+public class Exam04_AndroidArduinoServerDual {
 	static BufferedWriter bw;
 	static PrintWriter pw;
 	static InputStream in;
@@ -76,6 +76,34 @@ public class Exam03_AndroidArduinoServer {
 		};
 		Thread t = new Thread(runnable);
 		t.start();
+		Thread t2 = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				byte[] buffer = new byte[1024];
+				// Data의 Size를 의미함. -1은 데이터가 없다는 의미
+				int len = -1;
+				String str = "";
+				try {
+					// in으로 들어온 Byte를 읽어서 buffer로 넣음
+					while((len = in.read(buffer)) != -1) {
+						// buffer배열중 0번쨰부터 len번째까지를 String으로 생성하여 출력
+						String tmp = new String(buffer, 0, len);
+						if(tmp.contains("\n")) {
+							str += tmp;
+							pw.println(str.trim());
+							pw.flush();
+							System.out.println(str.trim());
+							str = "";
+						} else {
+							str += tmp;
+						}
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		t2.start();
 	}
 
 }
