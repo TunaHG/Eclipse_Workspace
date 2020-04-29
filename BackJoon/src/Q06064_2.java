@@ -1,4 +1,4 @@
-package Step;
+
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -7,8 +7,19 @@ import java.io.OutputStreamWriter;
 import java.io.IOException;
 import java.util.StringTokenizer;
 
-public class Q06064 {
-
+public class Q06064_2 {
+	static int GCD(int num1, int num2) {
+		while(true) {
+			if(num2 == 0) break;
+			int tmp = num1 % num2;
+			num1 = num2;
+			num2 = tmp;
+		}
+		return num1;
+	}
+	static int LCM(int num1, int num2) {
+		return num1 * num2 / GCD(num1, num2);
+	}
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -23,33 +34,29 @@ public class Q06064 {
 			int N = Integer.valueOf(st.nextToken());
 			int x = Integer.valueOf(st.nextToken());
 			int y = Integer.valueOf(st.nextToken());
-			int year_x = 1;
-			int year_y = 1;
 			
-			int cnt = 1;
-			int SW = 0;
-			while(true) {
-				if(year_x == x && year_y == y) {
-					SW = 1;
-					break;
-				} else if(year_x == M && year_y == N) {
-					break;
+			int tmpY = x;
+			int cnt = x;
+			
+			for(int j = 0; j < N; j++) {
+				int tmp;
+				if(tmpY % N == 0) {
+					tmp = N;
+				} else {
+					tmp = tmpY % N;
 				}
-				year_x++;
-				year_y++;
-				cnt++;
-				if(year_x > M) year_x = 1;
-				if(year_y > N) year_y = 1;
+				if(tmp == y) break;
+				tmpY += M;
+				cnt += M;
 			}
-			if(SW == 0) {
-				bw.write(-1 + "\n");
-			} else {
-				bw.write(cnt + "\n");
+			if(cnt > LCM(M, N)) {
+				cnt = -1;
 			}
+			bw.write(cnt + "\n");
 		}
 		bw.flush();
 		bw.close();
 		br.close();
 	}
 
-}
+} 	
