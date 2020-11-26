@@ -1,6 +1,6 @@
 # Eclipse Workspace
 
->  Eclipse를 활용하여 공부한 모든 Code
+>  Multicampus에서 Eclipse를 활용하여 공부한 모든 Code
 
 ## [DB](./DB)
 
